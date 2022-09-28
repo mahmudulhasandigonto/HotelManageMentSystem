@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body">
+						<h4 class="card-title">Guest</h4>
+						<h3 class="text-center">Checked-in Guest</h3>
+						<table
+							class="table table-striped table-hover mt-3 table-bordered table-sm zero-configuration" id="checkintable">
+							<thead>
+								<th>#</th>
+								<th>Room No</th>
+								<th>Guest Name</th>
+								<th>Check-in</th>
+								<th>Check-out</th>
+								<th>Days</th>
+								<th>Company</th>
+								<th>Nationality</th>
+								<th>Profile</th>
+
+							</thead>
+							<tbody>
+								<tr th:each="checkin, iterator:${checkin}">
+									<td th:text="${iterator.index}+1"></td>
+									<td th:text="${checkin.guestRoomNo}"></td>
+									<td th:text="${checkin.guestName}"></td>
+									<td th:text="${checkin.guestCheckin}"></td>
+									<td th:text="${checkin.guestCheckout}"></td>
+									<td th:text="${checkin.guestStayingDays}"></td>
+									<td th:text="${checkin.guestCompany}"></td>
+									<td th:text="${checkin.guestNationality}"></td>
+									<td><a th:href="@{'/guestProfile/'+${checkin.guestRegNo}}"
+										class="far fa-user btn btn-outline-primary btn-sm"></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

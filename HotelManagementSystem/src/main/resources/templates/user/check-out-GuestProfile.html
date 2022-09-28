@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card  " style="font-family: monospace;">
+					<div class="card-body ">
+						<div class="text-center  text-muted">
+							<h4 class="m-0">JW Marriott</h4>
+							<h5 class="m-0">Profile</h5>
+						</div>
+
+						<div class="container border rounded-3 border-success py-2 " style="width:90%">
+							<div class="row mt-1 ">
+								<div class="col-md-4 ">
+									<h4 class="text-center">
+										<span class="badge rounded-pill bg-primary " style="width:70%">Guest
+											Details</span>
+									</h4>
+									<h4 th:text="${checkin.guestName}" class="m-0"></h4>
+									<h6>Company ------- <span th:text=${checkin.guestCompany}></span></h6>
+									<h6>Email --------- <span th:text=${checkin.guestEmail}></span> </h6>
+									<h6>Purpose ------- <span th:text=${checkin.guestPurpose}></span></h6>
+									<h6>Nationality --- <span th:text=${checkin.guestNationality}></span></h6>
+									<h6>Payment Status- <span th:text=${checkin.guestPaymentStatus}></span></h6>
+							
+								</div>
+								<div class="col-md-4 "></div>
+								<div class="col-md-4  ps-5">
+									<h4 class="text-center">
+										<span class="badge rounded-pill bg-primary w-75">Room
+											Details</span>
+									</h4>
+									<h6>Reg No ------- <span th:text=${checkin.guestRegNo}></span></h6>
+									<h6>Room No ------ <span th:text=${checkin.guestRoomNo}></span></h6>
+									<h6>Check-in ----- <span th:text=${checkin.guestCheckin}></span></h6>
+									<h6>check-out ---- <span th:text=${checkin.guestCheckout}></span></h6>
+									<h6>Total Days --- <span th:text=${checkin.guestStayingDays}></span></h6>
+						
+
+								</div>
+							</div>
+							<div class="row mt-2 ">
+								<div class="col-md-6 ">
+								<h4 class="text-center">
+									<span class="badge rounded-pill bg-primary"  style="width:45%">Other
+										Services</span>
+								</h4>
+								<table class="table table-sm table-success ">
+									<thead>
+									<tr>
+										<th>#</th>
+										<th>BILL NO</th>
+										<th>Outlet</th>
+										<th>Amount</th>
+									</tr>
+									
+									</thead>
+									<tbody>
+										<tr th:each="others, iterator:${others}">
+											<td th:text="${iterator.index}+1"></td>
+											<td th:text="${others.billNo}"></td>
+											<td th:text="${others.outletName}"></td>
+											<td th:text="${others.grandTotal}"></td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+								<div class="col-md-2"> </div>
+								<div class="col-md-4  ps-5">
+								<h4 class="text-center">
+									<span class="badge rounded-pill bg-primary w-75">Amount</span>
+								</h4>
+								<h6>Room Rate ---- <span th:text=${checkin.guestPerNight}></span></h6>
+								<h6>Room Rent ---- <span th:text=${checkin.guestTotalRent}></span></h6>
+								<h6>Others Bill -- <span th:text=${checkin.guestOtherServices}></span></h6>
+								<hr>
+								<h6>Sub Total ---- <span th:text="${subTotal}"></span></h6>
+								<h6>Deposit ------ <span th:text=${checkin.guestDeposit}></span></h6>
+								<h6>Due Amount --- <span th:text="${due}"></span></h6>
+								</div>
+							</div>
+
+						</div>
+						<div class="text-center mt-2">
+							<a th:if="${checkin.guestPaymentStatus}=='Success'" th:href="@{'/check-out-guest/'+${checkin.guestRegNo}+'/'+${checkin.guestRoomNo}}"
+								class="btn btn-outline-warning btn-sm ">Check-out</a>
+							<a th:unless="${checkin.guestPaymentStatus}=='Success'" th:href="@{'/guestProfileUpdateForm/'+${checkin.guestRegNo}}"
+								class="btn btn-outline-danger btn-sm disabled"  >Check-out</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body">
+						<h5 class="card-title text-muted ">ROOM CHARGE</h5>
+
+						<div class="container border rounded-3 border-success h-75 w-75">
+
+							<h3 class="text-center">
+								<span class="badge rounded-pill bg-primary w-50 mt-1">Check
+									Processing</span>
+							</h3>
+							<!-- first row  -->
+							<div class="row ">
+								<div class="col-md-10 offset-md-1 ">
+								  <div style="height:195px; overflow-y:auto; margin-bottom: 5px">					
+									<table
+										class="table table-sm table-bordered table-striped table-hover zero-configuration"
+										style="font-family: monospace;">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>code</th>
+												<th>Item Name</th>
+												<th>Unit Price</th>
+												<th>Quantity</th>
+												<th>Price</th>
+											</tr>
+										
+										</thead>
+										<tbody>
+											<tr th:each="queueMenus, iterator:${queueMenus}">
+												<td th:text="${iterator.index}+1"></td>
+												<td th:text="${queueMenus.itemCode}"></td>
+												<td th:text="${queueMenus.itemName}"></td>
+												<td th:text="${queueMenus.unitPrice}"></td>
+												<td th:text="${queueMenus.itemquantity}"></td>
+												<td th:text="${queueMenus. totalPrice}"></td>
+											</tr>
+											<tr>
+												<td colspan="4">Grand Total</td>
+												<td></td>
+												<td th:text="${totalPrice}"></td>
+											</tr>
+										</tbody>
+									</table>
+								  </div>
+								</div>
+							</div>
+							<!--  End First row -->
+							<!--  Start Second row -->
+							<div>
+							<form th:action="@{/getguestData}" method="post">
+								<div class="row">
+
+									<div class=" col-md-4 ms-5 ps-4">
+
+										<div class="input-group mb-3 ">
+											<span class="input-group-text " style="width: 40%;">Room
+												No</span> <input type="number" class="form-control" name="roomNo"
+												th:value="${roomNo}">
+										</div>
+
+									</div>
+									<div class="col-md-3">
+										<input  type="hidden" name="tableNo" th:value="${qtablename}" />
+									</div>
+
+									<div class="col-md-3"></div>
+
+								</div>
+							</form>
+							</div>
+							<!-- End second row -->
+							<!-- start third row  -->
+							<div>
+								<form th:action="@{/roomChargeProcess}" method="post">
+									<div class="row">
+
+										<div class=" col-md-4 ms-5 ps-4">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">Reg
+													No </span> <input type="number" class="form-control"
+												aria-label="Sizing example input" name="guestRegNo" th:value="${regNo}">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<input type="hidden"  name="guestRoomNo" th:value="${checkin.guestRoomNo}"  />
+											<input  type="hidden" name="tableNo" th:value="${qtablename}" />
+										 </div>
+										<div class=" col-md-4 ms-3">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">Sub
+													Total </span> <input type="number" class="form-control"
+												id="subTotal"	aria-label="Sizing example input" name="subTotal" th:value="${totalPrice}">
+											</div>
+										</div>
+										<div class=" col-md-4 ms-5 ps-4">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">
+													Name </span> <input type="text" class="form-control"
+													aria-label="Sizing example input" name="guestName" th:value="${checkin.guestName}">
+											</div>
+										</div>
+										<div class="col-md-2 "></div>
+										<div class=" col-md-4 ms-3">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">Discount
+												</span> <input type="number" class="form-control"
+											value="0" name="discount"	id="discount" onkeyup="discountCal()" onblur="disAmount()" autofocus tabindex="1"	aria-label="Sizing example input">
+											</div>
+										</div>
+										<div class=" col-md-4 ms-5 ps-4">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">Company
+												</span> <input type="text" class="form-control"
+													aria-label="Sizing example input" name="guestCompany" th:value="${checkin.guestCompany}">
+											</div>
+										</div>
+										<div class="col-md-2"></div>
+										<div class=" col-md-4 ms-3">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text "
+													id="inputGroup-sizing-default" style="width: 40%;">Grand
+													Total </span> <input type="number" class="form-control"
+												id="gTotal"	aria-label="Sizing example input" name="grandTotal" th:value="${totalPrice}">
+											</div>
+										</div>
+										<!--modal  -->
+										<div class="  col-md-4 ms-5 ps-4">
+											<!-- Button trigger modal -->
+											<button type="button" class="btn btn-secondary fw-bold w-100"
+												data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+												View Note</button>
+											<!-- Modal -->
+											<div class="modal fade" id="staticBackdrop"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="staticBackdropLabel">Modal
+																title</h5>
+															<button type="button" class="btn-close"
+																data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body"><span th:text="${checkin.guestNote}"></span></div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary btn-sm"
+																data-bs-dismiss="modal">Close</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-2 text-center"></div>
+										<div class="col-md-4 text-center ms-3 mb-2">
+											<button th:if="${regNo}!= null" type="submit" class="btn btn-warning fw-bold w-100" tabindex="2">Charge</button>
+											<button th:unless="${regNo}!= null" type="button" onclick="resRoomChargeAlert()" class="btn btn-warning fw-bold w-100" tabindex="2">Charge</button>
+												
+										</div>
+										<!--End Modal  -->
+									</div>
+								</form>
+							</div>
+							<!-- End Third row -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		function resRoomChargeAlert(){
+			swal("WARNING!", "Please Enter Valid ROOM NO To Settle Check", "error", {
+				  button: "Aww yiss!",
+				});
+		}
+		</script>
+		
+	</section>
+
+</body>
+</html>

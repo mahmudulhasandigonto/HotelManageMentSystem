@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body">
+						<h4 class="card-title">Booking</h4>
+						<a th:href="@{/add}" class="btn btn-outline-warning btn-sm">Book+</a>
+						<table
+							class="table table-striped table-hover mt-3 table-bordered table-sm zero-configuration">
+							<thead>
+								<th>#</th>
+								<th>Booking No</th>
+								<th>Name</th>
+								<th>Check-in</th>
+								<th>Check-out</th>
+								<th>Booking Date</th>
+								<th>Room Type</th>
+								<th>Action</th>
+
+							</thead>
+							<tbody>
+						 		<tr th:each="booking, iterator:${booking}">
+									<td th:text="${iterator.index}+1"></td>
+									<td th:text="${booking.bookId}"></td>
+									<td th:text="${booking.guestName}"></td>
+									<td th:text="${booking.checkind}"></td>
+									<td th:text="${booking.checkOut}"></td>
+									<td th:text="${booking.bookingDate}"></td>
+									<td th:text="${booking.roomType}"></td>
+									<td> <a th:href="@{'/bookingUpdateForm/'+${booking.bookId}}"  class="far fa-edit btn btn-outline-primary btn-sm"></a> 
+										 <a href="#" th:onclick="|deleteBooking(${booking.bookId})|" class="far fa-minus-square btn btn-outline-warning btn-sm"></a>
+									</td>
+								</tr> 
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

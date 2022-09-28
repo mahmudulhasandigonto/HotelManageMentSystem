@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body">
+						<h4 class="card-title m-0 text-muted">BOOKING</h4>
+						<h4 class="text-center">UPDATE BOOKING</h4>
+						<div class="">
+							<div class="container border border-success rounded-3 py-3 w-75">
+								<form th:action="@{/bookingUpdate}" method="post" class="">
+									<div class="row gx-5 gy-2">
+
+
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Booking
+												ID </label> <input type="text" class="form-control"
+												placeholder="Enter Here" name="bookId"
+												th:value="${booking.bookId}" readonly="readonly">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Enter
+												Name</label> <input type="text" class="form-control"
+												placeholder="Enter Here" name="guestName"
+												th:value="${booking.guestName}">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label"> Email</label> <input
+												type="email" class="form-control" placeholder="Enter Here"
+												name="guestEmail" th:value="${booking.guestEmail}">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Check-in
+											</label> <input type="date" class="form-control" placeholder=""
+												name="checkind" th:value="${booking.checkind}">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">
+												Check-out</label> <input type="date" class="form-control"
+												placeholder="" name="checkOut" th:value=${booking.checkOut}>
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label"> Adult</label> <input
+												type="number" class="form-control" placeholder=""
+												name="adult" th:value="${booking.adult}">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Child </label> <input
+												type="number" class="form-control" placeholder="" value=0
+												name="child" th:value="${booking.child}">
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">
+												Nationality</label> <input type="text" class="form-control"
+												placeholder="" name="nationality"
+												th:value="${booking.nationality}">
+										</div>
+										<div class="col-md-6 mb-3">
+											<label class="form-label" for="autoSizingSelect">Room
+												Type</label> <select class="form-select" id="autoSizingSelect"
+												name="roomType">
+												<option th:each="room:${room}" th:value="${room.roomName}"
+													th:text="${room.roomName}"
+													th:selected=${booking.roomType==room.roomName}></option>
+											</select>
+										</div>
+										<div class="col-md-6">
+											<label for="inputEmail4" class="form-label">Modifying
+												Date </label> <input type="date" class="form-control" placeholder=""
+												name="modifyDate">
+										</div>
+										<div class="text-center ">
+											<button type="submit" class="btn btn-primary">Update</button>
+											<button type="reset" class="btn btn-warning ms-3">&nbsp;Reset&nbsp;</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- End container -->
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

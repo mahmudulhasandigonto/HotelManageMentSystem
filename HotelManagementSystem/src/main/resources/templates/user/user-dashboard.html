@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="container pt-2 pb-4 px-5 rounded-3 border border-success" style="background: #EBEAE3">
+			<div class=" text-white text-center">
+				<h2>
+					<span class="badge rounded-pill bg-secondary w-50 ">AT-A-GLANCE</span>
+				</h2>
+			</div>
+
+			<div class="container mt-3">
+				<div class="row gx-5 gy-4">
+					<!-- First Card  -->
+					<div class="col-md-4 mb-2 ">
+						<div class="row border    dashboard-card ">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+                              <i class="fas fa-walking  fa-4x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4 ">
+									<h5>ARRIVAL</h5>
+									<h1 th:text="${todaysArrival}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- second Card  -->
+					<div class="col-md-4">
+						<div class="row border  dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+								<i class="fas fa-suitcase-rolling  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>DEPARTURE</h5>
+									<h1 th:text="${totalDeparture}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- Third Card  -->
+					<div class="col-md-4">
+						<div class="row border dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-person-booth  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>OCCUPAID</h5>
+									<h1 th:text="${totalOccupaid}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- First Card  -->
+					<div class="col-md-4 mb-2">
+						<div class="row border  dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-door-open  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>CHECK-IN</h5>
+									<h1 th:text="${totalCheckin}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- second Card  -->
+					<div class="col-md-4">
+						<div class="row border  dashboard-card">
+								<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-door-closed  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>CHECK-OUT</h5>
+									<h1 th:text="${totalCheckout}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- Third Card  -->
+					<div class="col-md-4">
+						<div class="row border dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-users  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>GUEST</h5>
+									<h1 th:text="${totalGuest}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- First Card  -->
+					<div class="col-md-4">
+						<div class="row border  dashboard-card">
+						<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-hotel  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>BOOKING</h5>
+									<h1 th:text="${totalBooking}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- second Card  -->
+					<div class="col-md-4">
+						<div class="row border  dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-bed  fa-3x"></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>VACANT</h5>
+									<h1 th:text="${totalVacant}"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+					<!-- Third Card  -->
+					<div class="col-md-4">
+						<div class="row border  dashboard-card">
+							<div class="col bg-warning d-flex justify-content-center align-items-center">
+							<i class="fas fa-spa  fa-3x "></i>
+							</div>
+							<div class="col bg-white">
+								<div class="text-center text-muted mt-4">
+									<h5>OCCUPANCY</h5>
+									<h1 th:text="${occupancy}+'%'"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End card  -->
+				</div>
+			</div>
+			<!-- End container  -->
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body " style="height: 550px">
+						<h4 class="card-title text-muted">CHECK-OUT</h4>
+
+						<div class="container border rounded-3 border-success h-75 w-75">
+
+							<h3 class="text-center">
+								<span class="badge rounded-pill bg-primary w-25 mt-3">Home</span>
+							</h3>
+							<div class="row ">
+
+								<div class="card col-md-5 text-center mt-3 p-0  ms-5"
+									style="height: 220px">
+									<div class="card-header bg-warning " style="height: 40px;">
+									</div>
+									<div class="card-body">
+										<form th:action="@{/check-out-guestProfile}" method="post">
+											<h5 class="card-title">FIND BY ROOM</h5>
+											<input class="form-control" type="number" name="roomNo"><br>
+											<a href="#" class="btn btn-primary btn-sm">Search</a>
+										</form>
+									</div>
+									<div class="card-footer bg-warning  " style="height: 40px;">
+									</div>
+								</div>
+
+
+								<div class="card col-md-5  text-center mt-3 p-0 ms-5 "
+									style="height: 220px">
+									<div class="card-header bg-warning " style="height: 40px;">
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">POS</h5>
+										<h5>Fornt Office</h5>
+										<br> <a th:href="@{/fornt-office-pos}"
+											class="btn btn-primary btn-sm">&nbsp;Open&nbsp;</a>
+									</div>
+									<div class="card-footer bg-warning  " style="height: 40px;">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div th:if="${msg}=='Check-out Successful!!'" class="text-center alert alert-success w-50 mt-2 text-center">
+							<h4  th:text=${msg}></h4>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+</html>

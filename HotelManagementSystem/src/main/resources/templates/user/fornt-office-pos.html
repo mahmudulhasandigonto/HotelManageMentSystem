@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body ">
+						<h5 class="card-title text-muted p-0">CHECK-OUT</h5>
+
+						<div class="container border rounded-3 border-success  "
+							style="width: 85%">
+
+							<h3 class="text-center">
+								<span class="badge rounded-pill bg-primary w-25 mt-2 mb-2">POS</span>
+							</h3>
+
+							<!-- first row -->
+							<div class="row">
+
+								<div class="mb-2 col-md-4">
+									<form th:action="@{/fornt-office-data}" method="post">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text " style="width: 40%;">Room
+												No</span> <input id="rno" type="number" class="form-control"
+												name="roomNo" th:value="${checkin.guestRoomNo}">
+										</div>
+									</form>
+								</div>
+								<div class="col-md-4"></div>
+
+								<div class="mb-2 col-md-4">
+									<div class="input-group mb-3 ">
+										<span class="input-group-text " id="inputGroup-sizing-default"
+											style="width: 40%;">Total Rent </span> <input type="number"
+											class="form-control" aria-label="Sizing example input"
+											th:value="${checkin.guestTotalRent}">
+									</div>
+								</div>
+							</div>
+
+							<!-- second row -->
+							<form th:action="@{/saveCheckoutTransaction}" method="post">
+								<div class="row">
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Reg
+												No </span> <input type="number" class="form-control"
+												aria-label="Sizing example input" name="guestRegNo"
+												th:value="${checkin.guestRegNo}">
+										</div>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<input hidden="" th:with="room=this.value" id="rno"
+												type="number" class="form-control" name="guestRoomNo"
+												th:value="${checkin.guestRoomNo}" required="required">
+										</div>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Others
+												Bill</span> <input type="number" class="form-control"
+												aria-label="Sizing example input" name="guestOtherServices"
+												th:value="${checkin.guestOtherServices}">
+										</div>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Guest
+												Name</span> <input type="text" class="form-control"
+												aria-label="Sizing example input" name="guestName"
+												th:value="${checkin.guestName}" required="required">
+										</div>
+									</div>
+									<div class="col-md-4 text-center">
+										<button type="submit" class="btn btn-warning fw-bold "
+											style="width: 100px;" tabindex="3">Save</button>
+
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Sub
+												Total </span> <input type="number" class="form-control"
+												id="subTotal" aria-label="Sizing example input"
+												name="guestSubTotal" th:value="${subTotal}">
+										</div>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Check-in
+											</span> <input type="date" class="form-control"
+												aria-label="Sizing example input" name="guestCheckin"
+												th:value="${checkin.guestCheckin}">
+										</div>
+									</div>
+									<div class="col-md-4 text-center">
+										<button class="btn btn-warning fw-bold " style="width: 100px;"
+											tabindex="4">Print</button>
+
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Discount
+											</span> <input type="number" class="form-control"
+												onkeyup="discountCal()" onblur="disAmount()" id="discount"
+												value="0" aria-label="Sizing example input"
+												name="guestDiscount" tabindex="1" autofocus="autofocus">
+										</div>
+									</div>
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Check-out
+											</span> <input type="date" class="form-control"
+												aria-label="Sizing example input" name="guestCheckout"
+												th:value="${checkin.guestCheckout}">
+										</div>
+									</div>
+
+									<div class="col-md-4 text-center">
+										<a th:href="@{/check-out-Home/}+${user}"
+											class="btn btn-warning fw-bold" style="width: 100px;"
+											tabindex="5">Home</a>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Deposit
+											</span> <input type="number" class="form-control" id="deposit"
+												aria-label="Sizing example input" name="guestPayment"
+												th:value="${checkin.guestDeposit}">
+										</div>
+
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Total
+												Days</span> <input type="number" class="form-control"
+												aria-label="Sizing example input" name="guestStayingDays"
+												th:value="${checkin.guestStayingDays}">
+										</div>
+									</div>
+
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<input hidden="" type="number" class="form-control"
+												aria-label="Sizing example input" name="guestTotalRent"
+												th:value="${checkin.guestTotalRent}">
+										</div>
+									</div>
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Grand
+												Total </span> <input type="number" class="form-control" id="gTotal"
+												aria-label="Sizing example input" name="guestGrandTotal"
+												th:value="${grandTotal}">
+										</div>
+
+										<!-- 	<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Payment
+											</span> <input type="number" class="form-control" id="pay"
+												onkeyup="changeCal()" aria-label="Sizing example input"
+												name="guestPayment" tabindex="2" required="required">
+										</div> -->
+									</div>
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Room
+												Rate</span> <input type="number" class="form-control"
+												aria-label="Sizing example input" name="guestPerNight"
+												th:value="${checkin.guestPerNight}">
+										</div>
+									</div>
+									<div class="mb-2 col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text bg-primary "
+												id="inputGroup-sizing-default" style="width: 40%;">Payment
+											</span> <input type="number" class="form-control" id="pay"
+												onkeyup="changeCal()" aria-label="Sizing example input"
+												name="guestPayment" tabindex="2" required="required">
+										</div>
+									</div>
+
+									<div class="col-md-4">
+										<div class="input-group mb-3 ">
+											<span class="input-group-text "
+												id="inputGroup-sizing-default" style="width: 40%;">Change</span>
+											<input type="number" class="form-control"
+												aria-label="Sizing example input" id="change"
+												name="guestChange">
+										</div>
+									</div>
+
+								</div>
+								<!-- End first row  -->
+								<!-- Start second  -->
+							</form>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+					<div class="card-body ">
+						<h4 class="card-title text-muted p-0">GRANDIOSE</h4>
+
+						<div class="container border rounded-3 border-success  "
+							style="width: 95%; height:75vh">
+
+							<h3 class="text-center">
+								<span class="badge rounded-pill bg-primary w-25 mt-2 mb-2">POS</span>
+							</h3>
+							<!-- start main row -->
+							<div class="row">
+								<!-- start left column  -->
+								<div class="col-md-5 border-end border-2  mb-2 ">
+									<!-- start first row of left column  -->
+									<div class="row">
+										<div class="col-md-8">
+											<div class="input-group mb-3 ">
+												<input type="text" placeholder="Search"
+													th:onchange="'window.location.href = \'' + @{/getItemDetails/} + '\' + this.value'"
+													name="" class="form-control" list="item">
+												<datalist id="item">
+													<option th:each="menu:${menu}" th:value="${menu.itemName}"
+														th:text="${menu.itemName}"></option>
+												</datalist>
+											</div>
+										</div>
+									</div>
+									<!-- End first row of left column -->
+									<!-- start second row of left column -->
+									<form th:action="@{/queueMenu}" method="post">
+										<div class="row">
+											<!-- menu form start  -->
+
+											<div class="col-md-8">
+
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Item
+														Code </span> <input type="number" class="form-control"
+														required="required" name="itemCode" th:value="${itemCode}">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Item
+														Name </span> <input type="text" class="form-control"
+														name="itemName" th:value="${itemName}">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Unit
+														Price </span> <input id="unitPrice" type="number"
+														class="form-control" name="unitPrice"
+														th:value="${itemPrice}">
+												</div>
+
+											</div>
+												<div class="col-md-4">
+												<button type="submit" class="btn btn-warning btn-sm w-75  ">
+													<i class="far fa-plus-square fa-2x"></i>
+												</button>
+											</div>
+
+											<div class="col-md-8">
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Quantity
+													</span> <input type="number" class="form-control"
+														onblur="menuItemCal()" onkeyup="menuItemCal()"
+														id="quantity" value="1" name="itemquantity">
+												</div>
+											</div>
+										
+											<div class="col-md-8">
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Total
+														Price </span> <input id="totalPrice" type="number"
+														class="form-control" th:value="${itemPrice}"
+														name="totalPrice">
+												</div>
+											</div>
+											<div class="col-md-8">
+												<div class="input-group mb-3 ">
+													<span class="input-group-text " style="width: 40%;">Table
+													</span> <select class="form-select" name="tableNo">
+														<option th:each="table:${table}" th:value="${table}"
+															th:text="${table}" th:selected="${qtablename}==${table}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-8 text-center"></div>
+
+											<!-- menu form End  -->
+										</div>
+									</form>
+									<!-- End second row of left column -->
+								</div>
+								<!-- End left column  -->
+								<!-- start right column -->
+								<div class="col-md-7 ">
+									<!-- start first row inside right column  -->
+									<div class="row">
+										<div class="col-md-4 ms-4 ">
+											<div class="input-group mb-3 ">
+												<span class="input-group-text " style="width: 40%;">Table
+												</span> <input type="text" class="form-control"
+													th:value="${qtablename}">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-group mb-3 ms-5 ">
+												<span class="input-group-text " style="width: 40%;">Queue
+												</span> <select
+													th:onchange="'window.location.href = \'' + @{/showQueueTable} + '?tableNo=\' + this.value '"
+													class="form-select" name="" id="">
+													<option disabled="disabled" hidden="" selected="selected">Find
+														Table</option>
+													<option th:each="queueTable:${queueTable}"
+														th:value="${queueTable}" th:text="${queueTable}"
+														th:selected="${queueTable}==${qtablename}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<!-- end first row in right column  -->
+									<!-- start second row of second row -->
+									<div class="row">
+										<div class="col-md-11 ms-4 border-bottom border-success ">
+										 <div style="height:258px; overflow-y:auto; margin-bottom:5px">
+											<table
+												class="table table-sm table-bordered table-striped table-hover  zero-configuration"
+												style="font-family: monospace;">
+												<thead class="text-center">
+													<tr>
+														<th>#</th>
+														<th>CODE</th>
+														<th>ITEM NAME</th>
+														<th>UNIT</th>
+														<th>QTY</th>
+														<th>PRICE</th>
+														<th style="width:10%">X</th>
+													</tr>												
+												</thead>
+												<tbody>
+													<tr th:each="queueMenus, iterator:${queueMenus}">
+														<td th:text="${iterator.index}+1"></td>
+														<td th:text="${queueMenus.itemCode}"></td>
+														<td th:text="${queueMenus.itemName}"></td>
+														<td th:text="${queueMenus.unitPrice}"></td>
+														<td th:text="${queueMenus.itemquantity}"></td>
+														<td th:text="${queueMenus. totalPrice}"></td>
+														<td class="text-center"><a
+															th:href="@{'/deleteQueueItem/'+${queueMenus.id}+'/'+${qtablename}}"
+															class="far fa-times-circle"
+															style="text-decoration: none;"></a></td>
+													</tr>
+													<tr>
+														<td colspan="4">Grand Total</td>
+														<td></td>
+														<td th:text="${totalPrice}"></td>
+														<td class="text-center"><a
+															th:href="@{'/deleteAllQueueByTable/'+${qtablename}}"
+															class="fas fa-times-circle"
+															style="text-decoration: none;"></a></td>
+													</tr>
+												</tbody>
+											</table>
+										  </div>
+										</div>
+									</div>
+									<!-- End second row of right column -->
+									<div class="text-center mt-5 ">
+										    <a th:if="${qtablename}!= null" href="#" class="btn btn-warning fw-bold " style="width:90px;">CASH </a> 
+											<a th:unless="${qtablename}!= null" href="#" class="btn btn-warning fw-bold " onclick="resPaymentAlert()" style="width:90px;">CASH </a>
+										    <a th:if="${qtablename}!= null" href="#" class="btn btn-warning ms-3 fw-bold" style="width:90px;" >CARD</a> 
+											<a th:unless="${qtablename}!= null" href="#" class="btn btn-warning ms-3 fw-bold" onclick="resPaymentAlert()" style="width:90px;" >CARD </a>
+										    <a th:if="${qtablename}!= null" th:href="@{'/restaurantRoomCharge/'+${qtablename}}" class="btn btn-warning ms-3 fw-bold">CHARGE </a> 
+											<a th:unless="${qtablename}!= null" href="#" class="btn btn-warning ms-3 fw-bold" onclick="resPaymentAlert()">CHARGE </a>
+									</div>
+								</div>
+								<!-- End right column  -->
+							</div>
+							<!-- end main row  -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<script>
+			function resPaymentAlert(){
+				swal("WARNING!", "Please Select Queue Table!", "error", {
+					  button: "Aww yiss!",
+					});
+			}
+		</script>
+	</section>
+
+</body>
+</html>

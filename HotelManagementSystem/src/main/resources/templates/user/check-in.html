@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/mainbase:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section class="">
+		<div class="row">
+			<div class="col-12">
+				<div class="card ">
+
+					<div class="card-body">
+						<div class="">
+							<h5 class="card-title text-muted">CHECK-IN</h5>
+							<!-- <h5 class="text-center text-muted">REGISTRATION</h5> -->
+							<div class="card me-5 ms-5 " style="background: #489183;">
+								<div class="card-body">
+									<form th:action="@{/checkInProcess}" method="post"
+										class="row g-3">
+										<div class="col-md-4">
+											<label for="inputEmail4" class="form-label">Enter
+												Name</label> <input type="text" class="form-control"
+												placeholder="Enter Here" name="guestName">
+										</div>
+										<div class="col-md-4">
+											<label for="inputEmail4" class="form-label"> Email</label> <input
+												type="email" class="form-control" placeholder="Enter Here"
+												name="guestEmail">
+										</div>
+										<div class="col-md-4">
+											<label for="inputEmail4" class="form-label"> Passport
+												| NID</label> <input type="text" class="form-control"
+												placeholder="Enter Here" name="guestPnd">
+										</div>
+
+
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label">
+												Nationality</label> <input type="text" class="form-control"
+												placeholder="" name="guestNationality">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Purpose</label>
+											<input type="text" class="form-control" placeholder=""
+												name="guestPurpose">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Company</label>
+											<input type="text" class="form-control" placeholder=""
+												name="guestCompany">
+										</div>
+
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Adult</label> <input
+												type="number" class="form-control" placeholder=""
+												name="guestAdult">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label">Child </label> <input
+												type="number" class="form-control" placeholder="" value=0
+												name="guestChild">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label">Check-in
+											</label> <input type="date" class="form-control" placeholder=""
+												readonly="readonly" id="in" name="guestCheckin" th:value="${currentDate}">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label">
+												Check-out</label> <input type="date" class="form-control" id="out"
+												placeholder="" name="guestCheckout">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Total
+												Staying Days</label> <input type="number" class="form-control"
+												id="days" onblur="datecalculation()"
+												onclick="datecalculation()" value="1" placeholder=""
+												name="guestStayingDays">
+										</div>
+										<div class="col-md-3 ">
+											<label class="form-label" for="autoSizingSelect">Room
+												Name</label> <select class="form-select" id="autoSizingSelect"
+												name="guestRoomName">
+												<option selected disabled hidden="">Choose</option>
+												<option th:each="room:${room}" th:value="${room.roomName}"
+													th:text="${room.roomName}"></option>
+											</select>
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Room No</label>
+											<input type="text" list="name" class="form-select"
+												id="autoSizingSelect" name="guestRoomNo" placeholder="Search">
+											<datalist id="name">
+												<option th:each="rooms:${rooms}" th:value="${rooms.roomNo}"
+													th:text="${rooms.roomNo}"></option>
+											</datalist>
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Per
+												Night</label> <input type="number" class="form-control" value="0"
+												id="rent" onkeyup="rentCalculate()" placeholder=""
+												name="guestPerNight">
+										</div>
+										<div class="col-md-3">
+											<label for="inputEmail4" class="form-label"> Total
+												Rent</label> <input type="number" class="form-control" value="0"
+												id="totalRent" placeholder="" name="guestTotalRent">
+										</div>
+										<div class="col-md-4">
+											<label for="inputEmail4" class="form-label"> Deposit</label>
+											<input type="number" class="form-control" value="0"
+												placeholder="" name="guestDeposit">
+										</div>
+										<div class="col-md-4 ">
+											<label class="form-label" for="autoSizingSelect">Payment
+												Status </label> <select class="form-select" id="autoSizingSelect"
+												name="guestPaymentStatus">
+												<option selected disabled hidden="">Choose</option>
+												<option th:each="paymentStatus:${paymentStatus}"
+													th:value="${paymentStatus}" th:text="${paymentStatus}"></option>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<label for="inputEmail4" class="form-label"> Note </label> <input
+												type="text" class="form-control" placeholder=""
+												name="guestNote">
+										</div>
+
+
+
+										<div class="text-center ">
+											<button type="submit" class="btn btn-primary ">Check-in</button>
+											<button type="reset" class="btn btn-warning ms-3">&nbsp;&nbsp;Reset&nbsp;&nbsp;</button>
+										</div>
+									</form>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Chekc-in Date  -->
+	<!-- 	<script>
+			let dateInput = document.getElementById('in');
+			dateInput.valueAsDate = new Date();
+			console.log(new Date());
+		</script> -->
+
+	</section>
+
+</body>
+</html>

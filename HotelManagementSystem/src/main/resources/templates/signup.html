@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base:: layout(~{:: section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container mt-1">
+			<div class="row">
+				<div class="col-md-6  offset-md-3">
+					<div class="card shadow-lg  rounded">
+						<div class="card-body px-5">
+							<h3 class="text-center text-muted">POS ID FORM</h3>
+							<!-- Alert Message -->
+							<div th:if="${signupMsg}!=null" class="alert alert-success d-flex align-items-center" role="alert">
+							  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
+							      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+							  </svg>
+							  <div>
+							    <span th:text="${signupMsg}"></span>
+							  </div>
+							</div>
+							<form th:action="@{/signupProcess}" method="post">
+								<div class="border px-4 py-2 border-success rounded-3">
+									<!-- start field -->
+									<div class="mb-3">
+										<label for="nameField" class="form-label">Enter Name</label> <input
+											type="text" class="form-control" id="nameField"
+											placeholder="Enter Here" name="userName" required="required">
+									</div>
+									<div class="mb-3">
+										<label for="emailField" class="form-label">Enter Email</label>
+										<input type="email" class="form-control" id="emailField"
+											placeholder="Enter Here" name="userEmail" required="required">
+									</div>
+									<div class="mb-3">
+										<label for="idField" class="form-label">Enter ID</label> <input
+											type="text" class="form-control" id="idField"
+											placeholder="Enter Here" name="userId" required="required">
+									</div>
+									<div class="mb-3">
+										<label for="idField" class="form-label">Enter Password</label>
+										<input type="password" class="form-control" id="idField"
+											placeholder="Enter Here" name="userPassword" required="required">
+									</div>
+									<div class="mb-3">
+										<label for="imageField" class="form-label">Select
+											Image</label> <input type="file" class="form-control" id="imageField"
+											placeholder="Enter Here" name="userImageUrl" >
+									</div>
+
+								</div>
+								<div class="mb-2 mt-3 text-center">
+									<button type="submit" class="btn btn-primary ms-5">Submit</button>
+									<button type="reset" class="btn btn-warning ms-2">&nbsp;Reset&nbsp;</button>
+								</div>
+								<!--End border div  -->
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>
